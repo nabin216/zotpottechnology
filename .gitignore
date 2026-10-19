@@ -28,3 +28,5 @@ Thumbs.db
 !.env.example
 .env.note
 README.md
+# Local copies of SQL with real keys filled in
+supabase/*.local.sql

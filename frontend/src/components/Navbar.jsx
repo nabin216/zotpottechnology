@@ -68,6 +68,7 @@ function Navbar() {
         </Link>
 
         <div className="nav-links">
+          <NavLink to="/" end className={({ isActive }) => (isActive ? 'nav-active' : '')}>Home</NavLink>
           <div className="nav-dropdown" ref={menuRef}>
             <button
               type="button"
