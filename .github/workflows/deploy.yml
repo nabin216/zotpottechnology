@@ -36,6 +36,9 @@ jobs:
           OVERRIDE="${{ vars.VITE_BASE }}"
           if [ -n "$OVERRIDE" ]; then
             echo "value=$OVERRIDE" >> "$GITHUB_OUTPUT"
+          elif [ -s frontend/public/CNAME ]; then
+            # Custom domain (frontend/public/CNAME) serves the site from '/'.
+            echo "value=/" >> "$GITHUB_OUTPUT"
           else
             REPO="${GITHUB_REPOSITORY#*/}"
             case "$REPO" in

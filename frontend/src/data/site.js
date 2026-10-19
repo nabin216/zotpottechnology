@@ -6,7 +6,7 @@ export const site = {
   name: 'ZotPot Technologies',
   // Public address of the live site, no trailing slash (e.g. 'https://zotpot.co.uk').
   // Used for the sitemap and canonical links. Leave empty until the domain is live.
-  url: '',
+  url: 'https://zotpot.co.uk',
 
   email: 'hello@zotpot.co.uk',
   phone: '',
