@@ -45,7 +45,7 @@ function PrivacyPage() {
 
       <h2>Cookies and tracking</h2>
       <p>
-        This website does not use cookies, analytics or advertising trackers, and our fonts are hosted on our own site.
+        This website does not use cookies, analytics or advertising trackers, and our fonts are hosted on our own site. If you choose a currency for prices, that choice is remembered on your own device only.
         If we add analytics or similar tools in the future, we will update this policy and ask for your consent where required.
       </p>
 

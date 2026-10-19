@@ -4,15 +4,15 @@ import { CheckIcon } from '../components/ServiceIcons'
 import { usePageTitle } from '../components/usePageTitle'
 import { categories, getCategory } from '../data/services'
 import { site } from '../data/site'
+import { money } from '../data/currency'
 import { enquiryDestination, sendEnquiry } from '../data/enquiries'
 
-const sym = site.currency.symbol
-const budgets = [
-  `Under ${sym}500`,
-  `${sym}500 – ${sym}1,500`,
-  `${sym}1,500 – ${sym}5,000`,
-  `${sym}5,000 – ${sym}10,000`,
-  `Over ${sym}10,000`,
+const budgetRanges = () => [
+  `Under ${money(500)}`,
+  `${money(500)} – ${money(1500)}`,
+  `${money(1500)} – ${money(5000)}`,
+  `${money(5000)} – ${money(10000)}`,
+  `Over ${money(10000)}`,
   'Not sure yet',
 ]
 
@@ -242,7 +242,7 @@ function ContactPage() {
                 <label htmlFor="budget">Approximate budget</label>
                 <select {...fieldProps('budget')}>
                   <option value="">Select a range</option>
-                  {budgets.map(b => <option key={b} value={b}>{b}</option>)}
+                  {budgetRanges().map(b => <option key={b} value={b}>{b}</option>)}
                 </select>
               </div>
             </div>

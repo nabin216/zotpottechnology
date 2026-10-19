@@ -4,7 +4,8 @@ import { PackageCard, CostBreakdown, FaqList, CtaBand, SectionHeader, PricingNot
 import { usePageTitle } from '../components/usePageTitle'
 import { getCategory, startingPackage, lineOf, categoriesIn } from '../data/services'
 import { projectsFor } from '../data/portfolio'
-import { site, formatPrice } from '../data/site'
+import { site } from '../data/site'
+import { formatPrice } from '../data/currency'
 import { processSteps } from '../data/company'
 import NotFoundPage from './NotFound'
 

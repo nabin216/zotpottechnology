@@ -4,6 +4,8 @@ import { PackageCard, CostBreakdown, FaqList, CtaBand, SectionHeader, PricingNot
 import { usePageTitle } from '../components/usePageTitle'
 import { categories, getCategory, businessLines, categoriesIn } from '../data/services'
 import { site } from '../data/site'
+import { currentCurrency, money } from '../data/currency'
+import CurrencySwitch from '../components/CurrencySwitch'
 import { generalFaqs } from '../data/company'
 
 const priceFactors = [
@@ -30,7 +32,7 @@ function PricingPage() {
             Published starting prices for every service, with what's included and what isn't.
             Final prices are confirmed in a fixed, written quote.
           </p>
-          <p className="currency-badge">Prices in <strong>{site.currency.code}</strong>. {site.taxNote}</p>
+          <p className="currency-badge">Prices in <strong>{currentCurrency().code}</strong>. {site.taxNote} <CurrencySwitch /></p>
         </div>
       </section>
 
@@ -93,11 +95,11 @@ function PricingPage() {
           <div className="payment-terms">
             <h3>Payment terms</h3>
             <ul>
-              <li><strong>Projects under {site.currency.symbol}2,000:</strong> 50% to start, 50% on completion.</li>
+              <li><strong>Projects under {money(2000)}:</strong> 50% to start, 50% on completion.</li>
               <li><strong>Larger projects:</strong> split into agreed milestones.</li>
               <li><strong>Monthly services:</strong> billed at the start of each month. Minimum terms are listed on each plan.</li>
               <li><strong>Third-party costs</strong> (hosting, domains, licences, ad spend, AI usage) are paid directly to the provider.</li>
-              <li><strong>Currency and tax:</strong> all prices are in {site.currency.code}. {site.taxNote}</li>
+              <li><strong>Currency and tax:</strong> all prices are in {currentCurrency().code}. {site.taxNote}</li>
             </ul>
             <p className="payment-terms-link">Full details are in our <Link to="/terms">terms of service</Link>.</p>
           </div>

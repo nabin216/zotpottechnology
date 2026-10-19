@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { Arrow, CheckIcon } from './ServiceIcons'
-import { formatPrice, pricingNote, site } from '../data/site'
+import { site } from '../data/site'
+import { formatPrice, pricingNote, localizeText } from '../data/currency'
+import CurrencySwitch from './CurrencySwitch'
 import { getCategory } from '../data/services'
 
 export function PackageCard({ pkg, category }) {
@@ -48,7 +50,8 @@ function ClockIcon() {
 export function PricingNote() {
   return (
     <p className="pricing-note">
-      {pricingNote} Packages can be adjusted, and the final price is confirmed in a written quote.{' '}
+      <CurrencySwitch />
+      {pricingNote()} Packages can be adjusted, and the final price is confirmed in a written quote.{' '}
       <Link to="/terms">Terms</Link>
     </p>
   )
@@ -76,7 +79,7 @@ export function CostBreakdown({ category }) {
         <div className="extras-card">
           <h3>Not included in package prices</h3>
           <ul className="plain-list is-minus">
-            {exclusions.map(e => <li key={e}>{e}</li>)}
+            {exclusions.map(e => <li key={e}>{localizeText(e)}</li>)}
           </ul>
         </div>
       )}
@@ -84,7 +87,7 @@ export function CostBreakdown({ category }) {
         <div className="extras-card">
           <h3>Ongoing &amp; third-party costs</h3>
           <ul className="plain-list">
-            {ongoingCosts.map(e => <li key={e}>{e}</li>)}
+            {ongoingCosts.map(e => <li key={e}>{localizeText(e)}</li>)}
           </ul>
         </div>
       )}
@@ -92,7 +95,7 @@ export function CostBreakdown({ category }) {
         <div className="extras-card notes-card">
           <h3>Good to know</h3>
           <ul className="plain-list">
-            {notes.map(n => <li key={n}>{n}</li>)}
+            {notes.map(n => <li key={n}>{localizeText(n)}</li>)}
           </ul>
         </div>
       )}
@@ -106,7 +109,7 @@ export function FaqList({ faqs }) {
       {faqs.map(f => (
         <details className="faq-item" key={f.q}>
           <summary>{f.q}</summary>
-          <p>{f.a}</p>
+          <p>{localizeText(f.a)}</p>
         </details>
       ))}
     </div>

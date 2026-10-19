@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { usePageTitle } from '../components/usePageTitle'
 import { site } from '../data/site'
+import { currentCurrency, money } from '../data/currency'
 
 // General terms that match how the business works. Have them reviewed for the
 // country you operate in before relying on them.
@@ -25,9 +26,9 @@ function TermsPage() {
 
       <h2>2. Payment</h2>
       <p>
-        Unless your proposal says otherwise, projects under {site.currency.symbol}2,000 require 50% before work begins
+        Unless your proposal says otherwise, projects under {money(2000)} require 50% before work begins
         and 50% on completion. Larger projects are paid in agreed milestones. Monthly services are billed in advance at the
-        start of each month. All prices are in {site.currency.code}. {site.taxNote}
+        start of each month. All prices are in {currentCurrency().code}. {site.taxNote}
       </p>
 
       <h2>3. Third-party costs</h2>

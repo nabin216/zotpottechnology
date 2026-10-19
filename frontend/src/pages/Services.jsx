@@ -3,7 +3,7 @@ import { Arrow, CategoryIcon, CheckIcon } from '../components/ServiceIcons'
 import { CtaBand, SectionHeader, PricingNote } from '../components/Blocks'
 import { usePageTitle } from '../components/usePageTitle'
 import { businessLines, categoriesIn, upcomingServices, startingPackage } from '../data/services'
-import { formatPrice } from '../data/site'
+import { formatPrice } from '../data/currency'
 
 function ServicesPage() {
   usePageTitle('Services', 'Websites and e-commerce, software and AI automation, and growth, cloud and security services for small businesses.')

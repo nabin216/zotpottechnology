@@ -5,7 +5,8 @@ import { usePageTitle } from '../components/usePageTitle'
 import { businessLines, categoriesIn, getCategory, startingPackage } from '../data/services'
 import { platforms } from '../data/platforms'
 import { projects } from '../data/portfolio'
-import { site, formatPrice } from '../data/site'
+import { site } from '../data/site'
+import { formatPrice } from '../data/currency'
 import { generalFaqs, commitments, processSteps, audiences, positioning } from '../data/company'
 
 // Goal-based entry points: visitors pick what they want to achieve,

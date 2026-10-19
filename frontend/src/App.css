@@ -533,6 +533,16 @@ a:hover .arrow { transform: translateX(3px); }
 .notes-card { background: #fffbef; border-color: #f2e4b8; }
 .notes-card .plain-list { color: #5d5236; }
 
+/* ─── Currency switch ─── */
+.currency-switch { display: inline-flex; gap: 2px; padding: 2px; border-radius: 8px; background: var(--sage); border: 1px solid var(--border); vertical-align: middle; }
+.currency-switch button { padding: 3px 9px; border: 0; border-radius: 6px; background: none; color: var(--text-body); font-size: 12.5px; font-weight: 700; cursor: pointer; }
+.currency-switch button[aria-pressed='true'] { background: #fff; color: var(--green-900); box-shadow: var(--shadow-sm); }
+.pricing-note .currency-switch { margin-right: 10px; }
+.currency-badge .currency-switch { margin-left: 8px; }
+.currency-switch.is-dark { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .15); margin-left: 8px; }
+.currency-switch.is-dark button { color: rgba(255, 255, 255, .7); }
+.currency-switch.is-dark button[aria-pressed='true'] { background: #fff; color: var(--green-900); }
+
 /* ─── Testimonials ─── */
 .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .testimonial-card { margin: 0; padding: 28px; border-radius: var(--radius); background: #fff; border: 1px solid var(--border); }

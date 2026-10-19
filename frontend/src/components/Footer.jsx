@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import Logo from './Logo'
-import { site, pricingNote } from '../data/site'
+import { site } from '../data/site'
+import { pricingNote } from '../data/currency'
+import CurrencySwitch from './CurrencySwitch'
 import { businessLines, categoriesIn } from '../data/services'
 import { projects } from '../data/portfolio'
 
@@ -111,7 +113,7 @@ function Footer() {
           {legal.taxNumber && <> Tax/VAT no. {legal.taxNumber}.</>}
           {legal.registeredAddress && <> Registered office: {legal.registeredAddress}.</>}
         </span>
-        <span>{pricingNote}</span>
+        <span className="footer-currency">{pricingNote()} <CurrencySwitch className="is-dark" /></span>
       </div>
     </footer>
   )

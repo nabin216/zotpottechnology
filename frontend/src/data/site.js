@@ -29,8 +29,14 @@ export const site = {
     jurisdiction: '',
   },
 
-  // All prices in src/data/services.js are written in this currency.
-  currency: { code: 'USD', symbol: '$' },
+  // All prices in src/data/services.js are written in US dollars. Visitors
+  // whose computer is set to UK time see pounds instead; anyone can switch.
+  // GBP prices = USD × rate, rounded so $399 shows as £319 and $1,000 as £800.
+  // Adjust the rate to change every GBP price at once.
+  currencies: {
+    USD: { code: 'USD', symbol: '$', rate: 1 },
+    GBP: { code: 'GBP', symbol: '£', rate: 0.8 },
+  },
   taxNote: 'Prices exclude applicable taxes.',
 
   // Fill in full profile URLs to make each icon appear in the footer.
@@ -63,11 +69,3 @@ export const site = {
   // The testimonials section stays hidden while this list is empty.
   testimonials: [],
 }
-
-export function formatPrice(price, unit = '', from = false) {
-  if (price == null) return 'Custom quote'
-  const amount = `${site.currency.symbol}${price.toLocaleString('en-US')}`
-  return `${from ? 'From ' : ''}${amount}${unit}`
-}
-
-export const pricingNote = `All prices in ${site.currency.code}. ${site.taxNote}`
