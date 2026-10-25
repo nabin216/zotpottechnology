@@ -226,6 +226,9 @@ a:hover .arrow { transform: translateX(3px); }
 .nav-dropdown-toggle:hover,
 .nav-dropdown-toggle[aria-expanded='true'] { background: rgba(31, 67, 54, .06); }
 .nav-links .nav-active { color: var(--green-600); }
+.nav-links > a.nav-highlight { background: var(--green-50); color: var(--green-700); }
+.nav-links > a.nav-highlight:hover { background: var(--green-100); }
+.nav-links > a.nav-highlight::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green-500); }
 .nav-dropdown-toggle svg { width: 12px; height: 12px; transition: transform .2s ease; }
 .nav-dropdown-toggle[aria-expanded='true'] svg { transform: rotate(180deg); }
 
@@ -293,38 +296,55 @@ a:hover .arrow { transform: translateX(3px); }
 .hero-trust li { display: inline-flex; align-items: center; gap: 8px; color: var(--text-body); font-size: 14px; font-weight: 600; }
 
 .hero-visual { position: relative; padding: 28px 20px; }
-.browser {
+/* Example WhatsApp-style booking chat */
+.chat-demo {
   position: relative;
-  border-radius: 16px;
+  max-width: 440px;
+  margin: 0 auto;
+  border-radius: 22px;
   background: #fff;
   border: 1px solid var(--border);
   box-shadow: 0 30px 70px rgba(16, 38, 25, .16);
   overflow: hidden;
 }
-.browser-bar { display: flex; align-items: center; gap: 6px; padding: 12px 14px; background: #f3f5f1; border-bottom: 1px solid var(--border); }
-.browser-bar > span { width: 10px; height: 10px; border-radius: 50%; background: #e2786c; }
-.browser-bar > span:nth-child(2) { background: #e9b949; }
-.browser-bar > span:nth-child(3) { background: #6cc070; }
-.browser-url { flex: 1; margin-left: 10px; padding: 4px 12px; border-radius: 6px; background: #fff; color: var(--text-muted); font-size: 12px; }
-.browser-body { padding: 18px 20px 22px; }
-.mock-nav { display: flex; align-items: center; gap: 10px; }
-.mock-nav i { width: 26px; height: 26px; border-radius: 7px; background: var(--green-600); }
-.mock-nav b { width: 42px; height: 7px; border-radius: 4px; background: #e4ebe5; }
-.mock-nav em { margin-left: auto; width: 64px; height: 22px; border-radius: 6px; background: var(--green-900); }
-.mock-hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; align-items: center; margin-top: 26px; }
-.mock-hero i { display: block; height: 12px; margin-bottom: 9px; border-radius: 5px; background: var(--green-900); }
-.mock-hero i.thin { height: 7px; background: #dfe6e0; }
-.mock-hero .w80 { width: 90%; } .mock-hero .w60 { width: 65%; } .mock-hero .w40 { width: 80%; }
-.mock-hero em { display: block; width: 84px; height: 26px; margin-top: 16px; border-radius: 7px; background: var(--green-600); }
-.mock-img {
-  aspect-ratio: 4 / 3;
-  border-radius: 12px;
-  background:
-    radial-gradient(circle at 70% 30%, #fff6 0 18%, transparent 19%),
-    linear-gradient(135deg, #8cc898, #2c7a4b);
+.chat-head { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--green-900); color: #fff; }
+.chat-head strong { display: block; font-size: 15px; line-height: 1.2; }
+.chat-head small { display: block; font-size: 12px; color: var(--green-300); }
+.chat-avatar {
+  display: grid; place-items: center; flex: none;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--green-600); font-weight: 800;
 }
-.mock-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 22px; }
-.mock-cards div { height: 58px; border-radius: 10px; background: #f1f5f1; border: 1px solid var(--border); }
+.chat-label {
+  margin-left: auto; padding: 3px 10px; border-radius: 999px;
+  background: rgba(255, 255, 255, .12); color: var(--green-100);
+  font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+}
+.chat-body {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 20px 16px;
+  background: #efeae2 radial-gradient(circle at 1px 1px, rgba(16, 38, 25, .06) 1px, transparent 0) 0 0 / 14px 14px;
+}
+.chat-msg {
+  position: relative;
+  max-width: 82%;
+  margin: 0;
+  padding: 9px 12px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-dark);
+  box-shadow: 0 1px 1px rgba(16, 38, 25, .08);
+  animation: chat-in .45s ease-out both;
+  animation-delay: calc(var(--i) * .9s + .3s);
+}
+.chat-msg time { position: absolute; right: 10px; bottom: 4px; font-size: 10.5px; color: var(--text-muted); }
+.chat-customer { align-self: flex-end; background: #d9fdd3; border-top-right-radius: 4px; }
+.chat-bot { align-self: flex-start; background: #fff; border-top-left-radius: 4px; }
+.chat-input { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #f6f6f3; border-top: 1px solid var(--border); }
+.chat-input span { flex: 1; padding: 9px 14px; border-radius: 999px; background: #fff; color: var(--text-muted); font-size: 13px; }
+.chat-input i { width: 34px; height: 34px; border-radius: 50%; background: var(--green-600); }
+@keyframes chat-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 .float-card {
   position: absolute;
@@ -341,12 +361,12 @@ a:hover .arrow { transform: translateX(3px); }
 .float-card strong { display: block; font-size: 14px; color: var(--green-900); line-height: 1.2; }
 .float-card small { display: block; font-size: 12px; color: var(--text-muted); }
 .float-card .check-icon { width: 24px; height: 24px; color: var(--green-600); }
-.float-a { top: 0; right: -6px; }
+.float-a { top: 96px; left: -28px; }
 .float-b { bottom: 54px; left: -14px; animation-delay: -2s; }
-.float-c { bottom: 0; right: 24px; animation-delay: -4s; }
+.float-c { bottom: 26px; left: -10px; animation-delay: -4s; }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @media (prefers-reduced-motion: reduce) {
-  .float-card { animation: none; }
+  .float-card, .chat-msg { animation: none; }
   html { scroll-behavior: auto; }
 }
 
@@ -860,6 +880,30 @@ a:hover .arrow { transform: translateX(3px); }
 .lp-solution h3 { margin-top: 18px; font-size: 21px; }
 .lp-problem { margin: 8px 0 16px; color: var(--text-body); font-size: 15.5px; }
 .lp-solution-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 20px; }
+
+/* Savings calculator */
+.lp-calc {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px;
+  max-width: 980px; margin: 0 auto; padding: 32px;
+  border-radius: 20px; background: #fff; border: 1px solid var(--border); box-shadow: var(--shadow-md);
+}
+.lp-calc-inputs label {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  margin-top: 22px; color: var(--text-dark); font-weight: 600; font-size: 15px;
+}
+.lp-calc-inputs label:first-child { margin-top: 0; }
+.lp-calc-inputs label strong { color: var(--green-600); font-size: 18px; white-space: nowrap; }
+.lp-calc-inputs input[type='range'] { width: 100%; margin-top: 12px; accent-color: var(--green-600); }
+.lp-calc-hint { margin-top: 6px; color: var(--text-muted); font-size: 13px; }
+.lp-calc-result {
+  display: flex; flex-direction: column; gap: 8px; justify-content: center;
+  padding: 26px; border-radius: 16px; background: var(--green-900); color: var(--green-100);
+}
+.lp-calc-result p { margin: 0; }
+.lp-calc-result b { color: #fff; }
+.lp-calc-big { color: #fff; font-size: clamp(28px, 3.4vw, 38px); line-height: 1.1; letter-spacing: -.02em; }
+.lp-calc-result .button { margin-top: 12px; }
+.lp-calc-result small { color: var(--green-300); font-size: 12px; }
 .lp-steps { grid-template-columns: repeat(3, 1fr); }
 .lp-audit { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: start; }
 .lp-audit h2 { margin-top: 10px; font-size: clamp(28px, 3.4vw, 38px); line-height: 1.15; letter-spacing: -.02em; }
@@ -977,7 +1021,8 @@ a:hover .arrow { transform: translateX(3px); }
   .package-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
   .package-desc { min-height: 0; }
   .cost-grid, .cost-grid-3 { grid-template-columns: 1fr; }
-  .lp-hero-grid, .lp-audit { grid-template-columns: 1fr; }
+  .lp-hero-grid, .lp-audit, .lp-calc { grid-template-columns: 1fr; }
+  .lp-calc { padding: 22px; }
   .faq-section { grid-template-columns: 1fr; gap: 28px; }
   .cta-inner { flex-direction: column; align-items: flex-start; }
   .detail-hero-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -1000,8 +1045,8 @@ a:hover .arrow { transform: translateX(3px); }
   .hero-actions .button { flex: 1 1 auto; }
   .hero-visual { padding: 20px 6px; }
   .float-b { display: none; }
-  .float-a { right: -4px; }
-  .float-c { right: 8px; }
+  .float-a { left: 8px; }
+  .float-c { left: 8px; }
   .page-hero { padding: 40px 0; }
   .section-header { margin-bottom: 36px; }
   .section-header p { font-size: 16px; }

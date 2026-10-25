@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Arrow, CategoryIcon, CheckIcon } from '../components/ServiceIcons'
 import { FaqList, SectionHeader } from '../components/Blocks'
 import { usePageTitle } from '../components/usePageTitle'
-import { formatPrice } from '../data/currency'
+import { currentCurrency, formatPrice } from '../data/currency'
 import { site } from '../data/site'
 import { sendEnquiry } from '../data/enquiries'
 import { trackAuditConversion } from '../data/tracking'
@@ -254,6 +254,45 @@ function AuditForm() {
   )
 }
 
+// Rough estimate only: assumes half of repetitive admin can be automated,
+// over 46 working weeks. The audit replaces this with real numbers.
+const AUTOMATABLE_SHARE = 0.5
+const WORKING_WEEKS = 46
+
+function SavingsCalculator() {
+  const [hours, setHours] = useState(10)
+  const [rate, setRate] = useState(15)
+  const { symbol } = currentCurrency()
+  const savedHours = hours * AUTOMATABLE_SHARE
+  const yearly = Math.round(savedHours * rate * WORKING_WEEKS)
+
+  return (
+    <div className="lp-calc">
+      <div className="lp-calc-inputs">
+        <label htmlFor="calc-hours">
+          Hours a week your team spends on admin
+          <strong>{hours} hours</strong>
+        </label>
+        <input id="calc-hours" type="range" min="1" max="60" value={hours} onChange={e => setHours(Number(e.target.value))} />
+        <p className="lp-calc-hint">Answering enquiries, booking, reminders, chasing invoices, copying data between tools.</p>
+
+        <label htmlFor="calc-rate">
+          Cost of that time, per hour
+          <strong>{symbol}{rate}</strong>
+        </label>
+        <input id="calc-rate" type="range" min="10" max="80" step="1" value={rate} onChange={e => setRate(Number(e.target.value))} />
+      </div>
+      <div className="lp-calc-result" aria-live="polite">
+        <p>If we automated half of it, you could get back about</p>
+        <strong className="lp-calc-big">{savedHours.toLocaleString('en-GB')} hours a week</strong>
+        <p>worth roughly <b>{symbol}{yearly.toLocaleString('en-GB')} a year</b> in staff time.</p>
+        <a className="button button-primary button-block" href="#audit">Get my real numbers in a free audit</a>
+        <small>A rough estimate, not a quote. Your audit gives you real figures for your business.</small>
+      </div>
+    </div>
+  )
+}
+
 function BusinessAutomationPage() {
   usePageTitle(
     'Business Automation for UK Small Businesses',
@@ -315,6 +354,17 @@ function BusinessAutomationPage() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="section section-tint" id="savings">
+        <div className="shell">
+          <SectionHeader
+            kicker="Estimate your savings"
+            title="How much time could automation give you back?"
+            text="Move the sliders to get a quick estimate."
+          />
+          <SavingsCalculator />
         </div>
       </section>
 

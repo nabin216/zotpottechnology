@@ -4,7 +4,7 @@ import { site } from './site'
 
 const turnaround = site.quoteTurnaround
 
-export const positioning = 'Digital solutions for ambitious small businesses'
+export const positioning = 'AI automation, websites and growth for UK small businesses'
 
 // Who the business is for. Shown on the home and about pages.
 export const audiences = [

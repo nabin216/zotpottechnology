@@ -6,6 +6,7 @@ import { businessLines, categoriesIn } from '../data/services'
 import { projects } from '../data/portfolio'
 
 const links = [
+  { to: '/business-automation', label: 'Free audit', highlight: true },
   ...(projects.length > 0 ? [{ to: '/work', label: 'Our work' }] : []),
   { to: '/pricing', label: 'Pricing' },
   { to: '/about', label: 'About' },
@@ -68,7 +69,6 @@ function Navbar() {
         </Link>
 
         <div className="nav-links">
-          <NavLink to="/" end className={({ isActive }) => (isActive ? 'nav-active' : '')}>Home</NavLink>
           <div className="nav-dropdown" ref={menuRef}>
             <button
               type="button"
@@ -104,7 +104,11 @@ function Navbar() {
             </div>
           </div>
           {links.map(link => (
-            <NavLink key={link.to} to={link.to} className={({ isActive }) => (isActive ? 'nav-active' : '')}>
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) => [isActive && 'nav-active', link.highlight && 'nav-highlight'].filter(Boolean).join(' ')}
+            >
               {link.label}
             </NavLink>
           ))}

@@ -12,10 +12,10 @@ import { generalFaqs, commitments, processSteps, audiences, positioning } from '
 // Goal-based entry points: visitors pick what they want to achieve,
 // not which service name they think they need.
 const goals = [
+  { label: 'I want to automate tasks', hint: 'AI chatbots, booking, workflows', cat: 'ai-automation' },
   { label: 'I need a new website', hint: 'WordPress, Wix, custom', cat: 'web-development' },
-  { label: 'I want to sell online', hint: 'Shopify, WooCommerce', cat: 'web-development' },
   { label: 'I need more customers', hint: 'SEO, ads, social media', cat: 'digital-marketing' },
-  { label: 'I want to automate tasks', hint: 'AI chatbots, n8n, workflows', cat: 'ai-automation' },
+  { label: 'I want to sell online', hint: 'Shopify, WooCommerce', cat: 'web-development' },
   { label: 'I need custom software', hint: 'CRM, booking, SaaS', cat: 'custom-software' },
   { label: 'I need a mobile app', hint: 'Android and iOS', cat: 'mobile-apps' },
   { label: 'I need a logo or brand', hint: 'Logo, UI/UX, print', cat: 'ui-ux-branding' },
@@ -31,44 +31,50 @@ const featuredPackages = [
   return { category, pkg: category.packages.find(p => p.name === name) }
 })
 
+// An example of the kind of booking assistant we build, not a client's chat.
+const demoChat = [
+  { from: 'customer', text: 'Hi, can I book a check-up this week?', time: '21:47' },
+  { from: 'bot', text: 'Of course! We have Tue 10:30, Wed 14:00 or Thu 09:15. Which suits you?', time: '21:47' },
+  { from: 'customer', text: 'Tuesday 10:30 please', time: '21:48' },
+  { from: 'bot', text: 'Booked ✅ Tue 10:30 with Dr Patel. I’ll send a reminder the day before.', time: '21:48' },
+]
+
 function HeroVisual() {
   return (
     <div className="hero-visual" aria-hidden="true">
-      <div className="browser">
-        <div className="browser-bar">
-          <span /><span /><span />
-          <div className="browser-url">yourbusiness.com</div>
-        </div>
-        <div className="browser-body">
-          <div className="mock-nav"><i /><b /><b /><b /><em /></div>
-          <div className="mock-hero">
-            <div>
-              <i className="w80" /><i className="w60" /><i className="w40 thin" />
-              <em />
-            </div>
-            <div className="mock-img" />
+      <div className="chat-demo">
+        <div className="chat-head">
+          <span className="chat-avatar">Z</span>
+          <div>
+            <strong>Booking assistant</strong>
+            <small>Online · replies instantly</small>
           </div>
-          <div className="mock-cards"><div /><div /><div /></div>
+          <span className="chat-label">Example</span>
         </div>
+        <div className="chat-body">
+          {demoChat.map((m, i) => (
+            <p className={`chat-msg chat-${m.from}`} style={{ '--i': i }} key={m.text}>
+              {m.text}
+              <time>{m.time}</time>
+            </p>
+          ))}
+        </div>
+        <div className="chat-input"><span>Type a message</span><i /></div>
       </div>
       <div className="float-card float-a">
-        <CategoryIcon id="digital-marketing" color="#d97706" size={36} />
-        <div><strong>SEO &amp; Ads</strong><small>Monthly reporting</small></div>
-      </div>
-      <div className="float-card float-b">
         <CategoryIcon id="ai-automation" color="#6366f1" size={36} />
-        <div><strong>AI chatbot</strong><small>Answers 24/7</small></div>
+        <div><strong>Booked after hours</strong><small>No staff needed</small></div>
       </div>
       <div className="float-card float-c">
         <CheckIcon />
-        <div><strong>Fixed, written quotes</strong></div>
+        <div><strong>Reminder sent</strong><small>Fewer no-shows</small></div>
       </div>
     </div>
   )
 }
 
 function HomePage() {
-  usePageTitle(null, 'Websites, online stores, custom software, AI automation and digital marketing for ambitious small businesses. Published prices and free, fixed quotes.')
+  usePageTitle(null, 'AI automation, websites and digital marketing for UK small businesses. Chatbots, online booking and connected workflows, with published prices and free, fixed quotes.')
 
   return (
     <>
@@ -78,16 +84,16 @@ function HomePage() {
           <div className="hero-content">
             <span className="pill">{positioning}</span>
             <h1>
-              Websites, software and marketing that <em>grow your business.</em>
+              Let AI handle the admin. <em>You grow the business.</em>
             </h1>
             <p className="hero-copy">
-              We help local businesses, online brands and startups get online, sell more and save time,
-              with websites on Shopify, WordPress and React, custom software, AI automation and digital marketing.
+              We build AI chatbots, online booking, automatic reminders and connected workflows for UK
+              small businesses, plus the websites and marketing that bring customers in.
               Published prices, one team for all of it.
             </p>
             <div className="hero-actions">
-              <Link className="button button-primary button-lg" to="/contact">Get a free quote <Arrow /></Link>
-              <Link className="button button-outline button-lg" to="/pricing">See prices</Link>
+              <Link className="button button-primary button-lg" to="/business-automation">Book a free automation audit <Arrow /></Link>
+              <Link className="button button-outline button-lg" to="/contact">Get a free quote</Link>
             </div>
             <ul className="hero-trust">
               <li><CheckIcon />Free consultation</li>
