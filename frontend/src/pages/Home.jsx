@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Arrow, CategoryIcon, CheckIcon } from '../components/ServiceIcons'
 import { PackageCard, FaqList, CtaBand, SectionHeader, PricingNote, ProjectCard, SwipeHint } from '../components/Blocks'
 import { usePageTitle } from '../components/usePageTitle'
+import { AutomationFlow, FlowIcon, LineArt, TiltStage } from '../components/Visuals'
 import { businessLines, categoriesIn, getCategory, startingPackage } from '../data/services'
 import { platforms } from '../data/platforms'
 import { projects } from '../data/portfolio'
@@ -41,8 +42,10 @@ const demoChat = [
 
 function HeroVisual() {
   return (
-    <div className="hero-visual" aria-hidden="true">
-      <div className="chat-demo">
+    <TiltStage className="hero-visual">
+      <span className="hero-orb hero-orb-a" aria-hidden="true" />
+      <span className="hero-orb hero-orb-b" aria-hidden="true" />
+      <div className="chat-demo" aria-hidden="true">
         <div className="chat-head">
           <span className="chat-avatar">Z</span>
           <div>
@@ -61,17 +64,21 @@ function HeroVisual() {
         </div>
         <div className="chat-input"><span>Type a message</span><i /></div>
       </div>
-      <div className="float-card float-a">
+      <div className="float-card float-a" aria-hidden="true">
         <CategoryIcon id="ai-automation" color="#6366f1" size={36} />
         <div><strong>Booked after hours</strong><small>No staff needed</small></div>
       </div>
-      <div className="float-card float-c">
+      <div className="float-card float-c" aria-hidden="true">
         <CheckIcon />
         <div><strong>Reminder sent</strong><small>Fewer no-shows</small></div>
       </div>
-    </div>
+    </TiltStage>
   )
 }
+
+// Icon for each "why us" commitment, in the same order as company.js.
+const commitIcons = ['tag', 'key', 'message', 'calendar', 'life', 'shield']
+const processIcons = ['message', 'tag', 'spark', 'star']
 
 function HomePage() {
   usePageTitle(null, 'AI automation, websites and digital marketing for UK small businesses. Chatbots, online booking and connected workflows, with published prices and free, fixed quotes.')
@@ -120,6 +127,18 @@ function HomePage() {
         </div>
       </section>
 
+      {/* ─── AUTOMATION AT A GLANCE ─── */}
+      <section className="section shell flow-section">
+        <SectionHeader
+          kicker="Automation at a glance"
+          title="One enquiry. Zero admin."
+        />
+        <AutomationFlow />
+        <div className="center-link">
+          <Link className="button button-primary" to="/business-automation">See what we can automate for you <Arrow /></Link>
+        </div>
+      </section>
+
       {/* ─── GOAL FINDER ─── */}
       <section className="section shell">
         <SectionHeader
@@ -150,16 +169,18 @@ function HomePage() {
           <SectionHeader
             kicker="Who we work with"
             title="Built for ambitious small businesses"
-            text="We focus on businesses that are ready to grow online and want a reliable, straight-talking technology partner."
           />
           <div className="audience-grid">
-            {audiences.map(a => (
-              <Link className="audience-card" to={a.to} key={a.title}>
-                <h3>{a.title}</h3>
-                <p>{a.text}</p>
-                <ul>{a.needs.map(n => <li key={n}>{n}</li>)}</ul>
-              </Link>
-            ))}
+            {audiences.map(a => {
+              const c = getCategory(a.to.split('/').pop())
+              return (
+                <Link className="audience-card audience-compact" to={a.to} key={a.title}>
+                  <CategoryIcon id={c.id} color={c.color} size={46} />
+                  <h3>{a.title}</h3>
+                  <ul>{a.needs.map(n => <li key={n}>{n}</li>)}</ul>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -168,18 +189,17 @@ function HomePage() {
       <section className="section shell" id="services">
         <SectionHeader
           kicker="Our services"
-          title="Three ways we help your business grow"
-          text="Every service has its own page with packages, what's included, what isn't, and starting prices."
-        />
+          title="Three ways we help your business grow"        />
         <div className="line-stack">
           {businessLines.map((line, i) => (
             <div className="line-block" key={line.id}>
-              <div className="line-head">
+              <div className="line-head line-head-art">
                 <span className="line-number">{String(i + 1).padStart(2, '0')}</span>
                 <div>
                   <h3>{line.name}</h3>
                   <p>{line.desc}</p>
                 </div>
+                <LineArt id={line.id} />
               </div>
               <div className="line-cards">
                 {categoriesIn(line).map(c => {
@@ -226,14 +246,12 @@ function HomePage() {
           <SectionHeader
             kicker="Why ZotPot"
             title="Working with us is simple and transparent"
-            text="We earn trust through how we work: clear scope, clear prices and no lock-in."
           />
-          <div className="commit-grid">
-            {commitments.map(c => (
-              <div className="commit" key={c.title}>
-                <span className="commit-icon"><CheckIcon /></span>
+          <div className="commit-grid commit-compact">
+            {commitments.map((c, i) => (
+              <div className="commit" key={c.title} title={c.text}>
+                <span className="commit-icon"><FlowIcon name={commitIcons[i]} /></span>
                 <h3>{c.title}</h3>
-                <p>{c.text}</p>
               </div>
             ))}
           </div>
@@ -244,9 +262,10 @@ function HomePage() {
       <section className="section section-dark">
         <div className="shell">
           <SectionHeader kicker="How it works" title="From first message to launch in four clear steps" />
-          <ol className="process-grid">
+          <ol className="process-grid process-icons">
             {processSteps.map((p, i) => (
               <li className="process-step" key={p.title}>
+                <span className="process-icon"><FlowIcon name={processIcons[i]} /></span>
                 <span className="process-number">{String(i + 1).padStart(2, '0')}</span>
                 <h3>{p.title}</h3>
                 <p>{p.text}</p>
