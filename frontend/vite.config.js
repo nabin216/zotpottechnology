@@ -3,19 +3,21 @@ import path from 'node:path'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { site } from './src/data/site.js'
-import { categories } from './src/data/services.js'
+import { routes } from './src/data/routes.js'
 
 // GitHub Pages has no rewrite rules and serves 404.html for unknown paths.
 // Shipping a copy of index.html as 404.html lets the SPA router handle deep
 // links like /services on refresh or direct visit.
 function spaFallback() {
-  let outDir
+  let outDir, isSsrBuild
   return {
     name: 'spa-404-fallback',
     configResolved(config) {
       outDir = path.resolve(config.root, config.build.outDir)
+      isSsrBuild = Boolean(config.build.ssr)
     },
     closeBundle() {
+      if (isSsrBuild) return
       const index = path.join(outDir, 'index.html')
       if (fs.existsSync(index)) {
         fs.copyFileSync(index, path.join(outDir, '404.html'))
@@ -24,19 +26,15 @@ function spaFallback() {
   }
 }
 
-const routes = [
-  '/', '/services', ...categories.map(c => `/services/${c.id}`),
-  '/pricing', '/about', '/contact', '/terms', '/privacy',
-]
-
 // Structured business data for search engines, plus a sitemap and canonical
 // link once site.url is configured in src/data/site.js.
 function seo() {
-  let outDir
+  let outDir, isSsrBuild
   return {
     name: 'seo',
     configResolved(config) {
       outDir = path.resolve(config.root, config.build.outDir)
+      isSsrBuild = Boolean(config.build.ssr)
     },
     transformIndexHtml() {
       const org = {
@@ -57,7 +55,7 @@ function seo() {
       return tags
     },
     closeBundle() {
-      if (!site.url || !fs.existsSync(outDir)) return
+      if (isSsrBuild || !site.url || !fs.existsSync(outDir)) return
       const urls = routes.map(r => `  <url><loc>${site.url}${r}</loc></url>`).join('\n')
       fs.writeFileSync(
         path.join(outDir, 'sitemap.xml'),

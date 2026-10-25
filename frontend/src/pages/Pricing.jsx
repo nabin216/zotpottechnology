@@ -1,6 +1,6 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import { Arrow, CategoryIcon } from '../components/ServiceIcons'
-import { PackageCard, CostBreakdown, FaqList, CtaBand, SectionHeader, PricingNote } from '../components/Blocks'
+import { PackageCard, CostBreakdown, FaqList, CtaBand, SectionHeader, PricingNote, SwipeHint } from '../components/Blocks'
 import { usePageTitle } from '../components/usePageTitle'
 import { categories, getCategory, businessLines, categoriesIn } from '../data/services'
 import { site } from '../data/site'
@@ -72,6 +72,7 @@ function PricingPage() {
           <div className="package-grid">
             {active.packages.map(p => <PackageCard key={p.name} pkg={p} category={active} />)}
           </div>
+          <SwipeHint />
           <PricingNote />
           <CostBreakdown category={active} />
         </div>

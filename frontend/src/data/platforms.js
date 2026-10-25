@@ -11,8 +11,9 @@ import dockerRaw from 'simple-icons/icons/docker.svg?raw'
 import googleAdsRaw from 'simple-icons/icons/googleads.svg?raw'
 import metaRaw from 'simple-icons/icons/meta.svg?raw'
 
+// Icons are decorative (names are shown as text), so drop their <title>.
 function withFill(svg, hex) {
-  return svg.replace('<path ', `<path fill="#${hex}" `)
+  return svg.replace(/<title>.*?<\/title>/, '').replace('<path ', `<path fill="#${hex}" `)
 }
 
 export const platforms = [

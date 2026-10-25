@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Arrow, CategoryIcon, CheckIcon } from '../components/ServiceIcons'
-import { PackageCard, FaqList, CtaBand, SectionHeader, PricingNote, ProjectCard } from '../components/Blocks'
+import { PackageCard, FaqList, CtaBand, SectionHeader, PricingNote, ProjectCard, SwipeHint } from '../components/Blocks'
 import { usePageTitle } from '../components/usePageTitle'
 import { businessLines, categoriesIn, getCategory, startingPackage } from '../data/services'
 import { platforms } from '../data/platforms'
@@ -265,6 +265,7 @@ function HomePage() {
             </div>
           ))}
         </div>
+        <SwipeHint />
         <PricingNote />
         <div className="center-link">
           <Link className="button button-outline" to="/pricing">See all prices <Arrow /></Link>

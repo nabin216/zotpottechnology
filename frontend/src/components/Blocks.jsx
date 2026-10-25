@@ -47,6 +47,10 @@ function ClockIcon() {
   )
 }
 
+export function SwipeHint({ text = 'Swipe to compare packages' }) {
+  return <p className="swipe-hint" aria-hidden="true">{text} →</p>
+}
+
 export function PricingNote() {
   return (
     <p className="pricing-note">

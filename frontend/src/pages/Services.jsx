@@ -54,6 +54,11 @@ function ServicesPage() {
                       <p>{c.summary}</p>
                       <ul className="check-list two-col" style={{ '--cat': c.color }}>
                         {c.offerings.map(o => <li key={o}><CheckIcon />{o}</li>)}
+                        {c.offerings.length > 4 && (
+                          <li className="more-offerings">
+                            <Link to={`/services/${c.id}`}>+ {c.offerings.length - 4} more services</Link>
+                          </li>
+                        )}
                       </ul>
                     </div>
                     <div className="service-row-aside">

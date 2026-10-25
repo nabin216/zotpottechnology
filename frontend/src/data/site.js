@@ -39,6 +39,17 @@ export const site = {
   },
   taxNote: 'Prices exclude applicable taxes.',
 
+  // Google Ads conversion tracking. From Google Ads → Goals → Conversions →
+  // your "Audit booked" conversion → Tag setup → "Use Google tag manually":
+  //   tagId: the 'AW-…' ID, auditConversionLabel: the part after the slash
+  //   in send_to ('AW-123456789/AbCdEfGh' → 'AbCdEfGh').
+  // While tagId is empty nothing loads and no cookie banner is shown. Once set,
+  // the tag only loads after a visitor accepts cookies.
+  googleAds: {
+    tagId: import.meta.env?.VITE_GOOGLE_ADS_ID || '',
+    auditConversionLabel: import.meta.env?.VITE_GOOGLE_ADS_LABEL || '',
+  },
+
   // Fill in full profile URLs to make each icon appear in the footer.
   social: {
     linkedin: '',

@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { Arrow, CategoryIcon, CheckIcon } from '../components/ServiceIcons'
-import { PackageCard, CostBreakdown, FaqList, CtaBand, SectionHeader, PricingNote, ProjectCard } from '../components/Blocks'
+import { PackageCard, CostBreakdown, FaqList, CtaBand, SectionHeader, PricingNote, ProjectCard, SwipeHint } from '../components/Blocks'
 import { usePageTitle } from '../components/usePageTitle'
 import { getCategory, startingPackage, lineOf, categoriesIn } from '../data/services'
 import { projectsFor } from '../data/portfolio'
@@ -84,6 +84,7 @@ function ServiceDetailPage() {
           <div className="package-grid">
             {c.packages.map(p => <PackageCard key={p.name} pkg={p} category={c} />)}
           </div>
+          <SwipeHint />
           <PricingNote />
           <CostBreakdown category={c} />
         </div>

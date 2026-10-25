@@ -1,6 +1,7 @@
 import { usePageTitle } from '../components/usePageTitle'
 import { site } from '../data/site'
 import { enquiryDestination } from '../data/enquiries'
+import { openConsentSettings, trackingEnabled } from '../data/tracking'
 
 // Keep this accurate: if you add analytics, chat widgets, embedded maps or a
 // form provider, update the "Services we use" and "Cookies" sections, and add
@@ -44,10 +45,21 @@ function PrivacyPage() {
       </p>
 
       <h2>Cookies and tracking</h2>
-      <p>
-        This website does not use cookies, analytics or advertising trackers, and our fonts are hosted on our own site. If you choose a currency for prices, that choice is remembered on your own device only.
-        If we add analytics or similar tools in the future, we will update this policy and ask for your consent where required.
-      </p>
+      {trackingEnabled ? (
+        <p>
+          With your consent, we use Google Ads cookies to measure which of our adverts lead to enquiries. Google
+          processes this data under its own privacy policy. These cookies are off unless you click Accept, and you can
+          change your choice at any time in{' '}
+          <button type="button" className="inline-link-button" onClick={openConsentSettings}>cookie settings</button>.
+          Your currency and cookie choices are remembered on your own device. Our fonts are hosted on our own site.
+        </p>
+      ) : (
+        <p>
+          This website does not use cookies, analytics or advertising trackers, and our fonts are hosted on our own site.
+          If you choose a currency for prices, that choice is remembered on your own device only. If we add analytics or
+          advertising tools in the future, we will update this policy and ask for your consent where required.
+        </p>
+      )}
 
       <h2>How long we keep it</h2>
       <p>

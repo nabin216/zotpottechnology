@@ -3,6 +3,7 @@ import Logo from './Logo'
 import { site } from '../data/site'
 import { pricingNote } from '../data/currency'
 import CurrencySwitch from './CurrencySwitch'
+import { openConsentSettings, trackingEnabled } from '../data/tracking'
 import { businessLines, categoriesIn } from '../data/services'
 import { projects } from '../data/portfolio'
 
@@ -94,9 +95,11 @@ function Footer() {
           <Link to="/about">About us</Link>
           {projects.length > 0 && <Link to="/work">Our work</Link>}
           <Link to="/pricing">Pricing</Link>
+          <Link to="/business-automation">Free automation audit</Link>
           <Link to="/contact">Contact</Link>
           <Link to="/terms">Terms of service</Link>
           <Link to="/privacy">Privacy policy</Link>
+          {trackingEnabled && <button type="button" className="footer-link-button" onClick={openConsentSettings}>Cookie settings</button>}
         </div>
         <div className="footer-col footer-contact">
           <h5>Get in touch</h5>
