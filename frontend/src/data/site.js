@@ -9,7 +9,7 @@ export const site = {
   url: 'https://zotpot.co.uk',
 
   email: 'hello@zotpot.co.uk',
-  phone: '',
+  phone: '07707 366075',
   // Full international number, digits only (e.g. '447700900123').
   // When set, a WhatsApp chat button appears on every page.
   whatsapp: '447707366075',
@@ -29,8 +29,8 @@ export const site = {
     jurisdiction: '',
   },
 
-  // All prices in src/data/services.js are written in US dollars. Visitors
-  // whose computer is set to UK time see pounds instead; anyone can switch.
+  // All prices in src/data/services.js are written in US dollars. Everyone
+  // sees pounds by default; visitors can switch to dollars.
   // GBP prices = USD × rate, rounded so $399 shows as £319 and $1,000 as £800.
   // Adjust the rate to change every GBP price at once.
   currencies: {

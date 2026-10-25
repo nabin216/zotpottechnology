@@ -43,8 +43,10 @@ function seo() {
         name: site.legal.registeredName || site.name,
         description: 'Web development, custom software, AI automation and digital marketing for small businesses.',
         email: site.email,
-        ...(site.url && { url: site.url }),
+        ...(site.url && { url: site.url, logo: `${site.url}/logo-512.png`, image: `${site.url}/og-image.png` }),
         ...(site.phone && { telephone: site.phone }),
+        areaServed: { '@type': 'Country', name: 'United Kingdom' },
+        currenciesAccepted: 'GBP',
         ...(site.address && { address: site.address }),
         sameAs: Object.values(site.social).filter(Boolean),
       }

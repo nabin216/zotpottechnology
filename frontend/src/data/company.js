@@ -86,8 +86,8 @@ export const generalFaqs = [
     a: 'Design and website packages include two rounds of revisions at each design stage. Additional rounds or changes outside the agreed scope are quoted before we do them.',
   },
   {
-    q: 'Do you work with clients in other countries?',
-    a: 'Yes. We work remotely with businesses worldwide, using video calls, email and shared project boards to keep everything clear.',
+    q: 'Do you work with businesses across the UK?',
+    a: 'Yes. We work with businesses all over the UK, during UK office hours, using video calls, phone, email and shared project boards to keep everything clear.',
   },
   {
     q: 'How long will my project take?',

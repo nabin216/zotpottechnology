@@ -6,30 +6,27 @@ import { site } from './site'
 // (formatPrice, localizeText) can be called anywhere without hooks.
 
 const STORAGE_KEY = 'zotpot-currency'
-const UK_TIME_ZONES = ['Europe/London', 'Europe/Belfast', 'Europe/Guernsey', 'Europe/Jersey', 'Europe/Isle_of_Man', 'GB', 'GB-Eire']
+// UK business: pounds unless the visitor has chosen dollars.
+const DEFAULT_CURRENCY = 'GBP'
 
-let active = 'USD'
+let active = DEFAULT_CURRENCY
 
 export function setActiveCurrency(code) {
-  active = site.currencies[code] ? code : 'USD'
+  active = site.currencies[code] ? code : DEFAULT_CURRENCY
 }
 
 export function currentCurrency() {
   return site.currencies[active]
 }
 
-// Saved choice first, then UK time zone → GBP, otherwise USD.
-// No location lookup or tracking: the time zone never leaves the browser.
+// Saved choice first, otherwise GBP. Matches the prerendered HTML, so
+// search engines, ad reviewers and first-time visitors all see pounds.
 export function detectCurrency() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY)
     if (saved && site.currencies[saved]) return saved
   } catch { /* storage blocked: fall through */ }
-  try {
-    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone
-    if (UK_TIME_ZONES.includes(zone)) return 'GBP'
-  } catch { /* very old browser */ }
-  return 'USD'
+  return DEFAULT_CURRENCY
 }
 
 export function saveCurrency(code) {
@@ -68,5 +65,5 @@ export function pricingNote() {
   return `All prices in ${currentCurrency().code}. ${site.taxNote}`
 }
 
-export const CurrencyContext = createContext({ code: 'USD', setCode: () => {} })
+export const CurrencyContext = createContext({ code: DEFAULT_CURRENCY, setCode: () => {} })
 export const useCurrency = () => useContext(CurrencyContext)
